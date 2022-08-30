@@ -1,6 +1,6 @@
 from django.db import models
 
-from category_app.models import Product
+from category_app.models import Product, get_product_url
 
 
 class Smartphone(Product):
@@ -17,3 +17,6 @@ class Smartphone(Product):
 
     def __str__(self):
         return "{} : {}".format(self.category.name, self.title)
+
+    def get_absolute_url(self):
+        return get_product_url(self, 'product_detail')
