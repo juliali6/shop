@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load specifications %}
 {% block content %}
     <nav aria-label="breadcrumb" class="mt-3">
     <ol class="breadcrumb">
@@ -17,6 +17,16 @@
         <p>Price: {{product.price }} $</p>
         <p>Description: {{product.description }}</p>
     </div>
+    <p class="mt-4">Specification:</p>
+
+    {{ product|product_spec }}
+
+    {% if product.category.slug == 'notebooks' %}
+        {% include 'notebook_specification.html' %}
+    {% else %}
+        {% include 'smartphone_specification.html' %}
+    {% endif %}
+
 </div>
 
 
