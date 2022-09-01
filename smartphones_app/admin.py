@@ -12,11 +12,24 @@ class SmartphoneAdminForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        instance = kwargs.get('instance')
+        if not instance.sd:
+            self.fields['sd_volume_max'].widget.attrs.update({
+                'readonly': True, 'style': 'background: lightgray'
+            })
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.fields['image'].help_text = mark_safe(
             '<span style="color:red;">Uploading an image with a minimum resolution {}x{}</span>'.format(
                 *Product.MIN_RESOLUTION
             )
         )
+
+    def clean(self):
+        if not self.cleaned_data['sd']:
+            self.cleaned_data['sd_volume_max'] = None
+        return self.cleaned_data
 
     def clean_image(self):
         image = self.cleaned_data['image']
@@ -33,6 +46,8 @@ class SmartphoneAdminForm(ModelForm):
 
 
 class SmartphoneAdmin(admin.ModelAdmin):
+
+    change_form_template = 'admin.html'
 
     form = SmartphoneAdminForm
 
