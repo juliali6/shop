@@ -46,6 +46,7 @@ class LatestProductManager:
 
 
 class LatestProducts:
+    """Имитация модели"""
 
     objects = LatestProductManager()
 
