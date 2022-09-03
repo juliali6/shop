@@ -2,13 +2,17 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import DetailView
 
+from cartproduct_app.mixins import CartMixin
+from cartproduct_app.models import Cart
 from category_app.mixins import CategoryDetailMixin
 from category_app.models import Category, LatestProducts
+from customer_app.models import Customer
 from notebooks_app.models import Notebook
 from smartphones_app.models import Smartphone
 
 
-class BaseView(View):
+class BaseView(CartMixin, View):
+    """Основной класс View"""
 
     def get(self, request, *args, **kwargs):
         categories = Category.objects.get_categories_for_left_sidebar()
@@ -18,11 +22,12 @@ class BaseView(View):
         context = {
             'categories': categories,
             'products': products,
+            'cart': self.cart,
         }
         return render(request, 'base.html', context)
 
 
-class ProductDetailView(CategoryDetailMixin, DetailView):
+class ProductDetailView(CartMixin, CategoryDetailMixin, DetailView):
 
     CT_MODEL_MODEL_CLASS = {
         'notebook': Notebook,
@@ -40,8 +45,13 @@ class ProductDetailView(CategoryDetailMixin, DetailView):
     template_name = 'product_detail.html'
     slug_url_kwarg = 'slug'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ct_model'] = self.model._meta.model_name
+        return context
 
-class CategoryDetailView(CategoryDetailMixin, DetailView):
+
+class CategoryDetailView(CartMixin, CategoryDetailMixin, DetailView):
 
     model = Category
     queryset = Category.objects.all()
