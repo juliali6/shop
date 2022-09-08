@@ -3,6 +3,8 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 
+from cartproduct_app.models import Cart
+
 User = get_user_model()
 
 
@@ -49,6 +51,7 @@ class Order(models.Model):
         blank=True,
         null=True,
     )
+    cart = models.ForeignKey(Cart, verbose_name='Cart', on_delete=models.CASCADE, null=True, blank=True)
     address = models.CharField(max_length=1024, verbose_name='Address', null=True, blank=True)
     status = models.CharField(
         max_length=100,

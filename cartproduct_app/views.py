@@ -6,6 +6,7 @@ from django.views import View
 
 from cartproduct_app.mixins import CartMixin
 from cartproduct_app.models import CartProduct
+from cartproduct_app.utils import recalc_cart
 from category_app.models import Category
 
 
@@ -25,7 +26,7 @@ class AddToCartView(CartMixin, View):
         )
         if created:
             self.cart.products.add(cart_product)
-        self.cart.save()
+        recalc_cart(self.cart)
         messages.add_message(request, messages.INFO, "Product successfully added")
         return HttpResponseRedirect('/cart/')
 
@@ -45,7 +46,7 @@ class DeleteFromCartView(CartMixin, View):
         )
         self.cart.products.remove(cart_product)
         cart_product.delete()
-        self.cart.save()
+        recalc_cart(self.cart)
         messages.add_message(request, messages.INFO, "Product successfully deleted")
         return HttpResponseRedirect('/cart/')
 
@@ -66,7 +67,7 @@ class ChangeQTYView(CartMixin, View):
         qty = int(request.POST.get('qty'))
         cart_product.qty = qty
         cart_product.save()
-        self.cart.save()
+        recalc_cart(self.cart)
         messages.add_message(request, messages.INFO, "Qty successfully changed")
         return HttpResponseRedirect('/cart/')
 
