@@ -10,9 +10,10 @@ User = get_user_model()
 
 class Customer(models.Model):
 
-    user = models.ForeignKey(User,verbose_name='User', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name='User', on_delete=models.CASCADE)
     phone = models.CharField(max_length=20, verbose_name='Phone number', null=True, blank=True)
     address = models.CharField(max_length=255, verbose_name='Address', null=True, blank=True)
+    avatar = models.ImageField(blank=True, null=True)
     orders = models.ManyToManyField('Order', verbose_name='Buyer orders', related_name='related_customer')
 
     def __str__(self):

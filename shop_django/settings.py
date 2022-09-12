@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_spectacular',
-    'main_app',
+    'crispy_forms',
     'category_app',
     'cartproduct_app',
     'customer_app',
     'notebooks_app',
     'smartphones_app',
-    'crispy_forms',
+    'menu_app',
 
 ]
 
@@ -148,3 +148,5 @@ STATIC_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+APPEND_SLASH = False

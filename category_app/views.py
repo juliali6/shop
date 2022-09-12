@@ -3,10 +3,8 @@ from django.views import View
 from django.views.generic import DetailView
 
 from cartproduct_app.mixins import CartMixin
-from cartproduct_app.models import Cart
 from category_app.mixins import CategoryDetailMixin
 from category_app.models import Category, LatestProducts
-from customer_app.models import Customer
 from notebooks_app.models import Notebook
 from smartphones_app.models import Smartphone
 
