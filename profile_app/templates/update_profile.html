@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Editing your profile {{ user.username }}</h1>
+        <p>Your data:</p>
+        <form method="post" enctype="multipart/form-data">
+            {{ user_form|crispy }}
+            {{ profile_form|crispy }}
+            {% if user.avatar %}<div><img src="{{ user.avatar.url }}" alt="" width="100px" height="100px"></div>{% endif %}
+            {% csrf_token %}
+            <p><input type="submit" value="Save"></p>
+        </form>
+{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+
+<a href="{% url 'update_profile' %}">Editing profile</a>
+        <h1>Your profile</h1>
+            {% if avatar.avatar %}
+                <div><img src="{{ avatar.avatar.url }}" alt="" width="250px" height="200px"></div>
+            {% else %}
+                <div><img src="/media/defaultavatar.jpg" alt="" width="250px" height="200px"></div>
+            {% endif %}
+        <h2>{{ user.username }}</h2>
+        <h3>First name: {{ user.first_name }}</h3>
+        <h3>Last name: {{ user.last_name }}</h3>
+        <h3>Your email: {{ user.email }}</h3>
+        <h3>Your phone: {{ avatar.phone }}</h3>
+{% endblock content %}
+</body>
+</html>
