@@ -60,7 +60,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 3
+    'PAGE_SIZE': 3,
 }
 
 MIDDLEWARE = [
@@ -161,6 +161,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 APPEND_SLASH = False
 
 AUTH_USER_MODEL = 'user_app.User'
+
+SPECTACULAR_SETTINGS = {
+    'COMPONENT_SPLIT_REQUEST': True
+}
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
