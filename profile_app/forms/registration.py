@@ -14,25 +14,25 @@ class RegistrationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].label = 'Логин'
-        self.fields['password'].label = 'Пароль'
-        self.fields['confirm_password'].label = 'Подтвердите пароль'
-        self.fields['phone'].label = 'Номер телефона'
-        self.fields['first_name'].label = 'Имя'
-        self.fields['last_name'].label = 'Фамилия'
-        self.fields['address'].label = 'Адрес'
-        self.fields['email'].label = 'Электронная почта'
+        self.fields['username'].label = 'Login'
+        self.fields['password'].label = 'Password'
+        self.fields['confirm_password'].label = 'Confirm password'
+        self.fields['phone'].label = 'Mobile phone'
+        self.fields['first_name'].label = 'First name'
+        self.fields['last_name'].label = 'Last name'
+        self.fields['address'].label = 'Address'
+        self.fields['email'].label = 'Email'
 
     def clean_email(self):
         email = self.cleaned_data['email']
         domain = email.split('.')[-1]
         if domain in ['com', 'net']:
             raise forms.ValidationError(
-                f'Регистрация для домена {domain} невозможна'
+                f'Registration for domain {domain} is not possible'
             )
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError(
-                f'Данный почтовый адрес уже зарегистрирован в системе'
+                f'This email address is already registered in the system'
             )
         return email
 
@@ -40,7 +40,7 @@ class RegistrationForm(forms.ModelForm):
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError(
-                f'Имя {username} занято'
+                f'Name {username} taken'
             )
         return username
 
@@ -48,7 +48,7 @@ class RegistrationForm(forms.ModelForm):
         password = self.cleaned_data['password']
         confirm_password = self.cleaned_data['confirm_password']
         if password != confirm_password:
-            raise forms.ValidationError('Пароли не совпадают')
+            raise forms.ValidationError('Passwords do not match')
         return self.cleaned_data
 
     class Meta:
