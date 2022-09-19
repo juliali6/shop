@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'menu_app',
     'user_app',
     'profile_app',
+    'reviews_app',
 
 ]
 

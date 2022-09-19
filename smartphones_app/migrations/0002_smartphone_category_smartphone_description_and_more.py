@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='smartphone',
             name='image',
-            field=models.ImageField(default=True, upload_to='', verbose_name='Image'),
+            field=models.ImageField(upload_to='', verbose_name='Image'),
         ),
         migrations.AddField(
             model_name='smartphone',
@@ -35,11 +35,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='smartphone',
             name='slug',
-            field=models.SlugField(default=True, unique=True),
+            field=models.SlugField(unique=True),
         ),
         migrations.AddField(
             model_name='smartphone',
             name='title',
-            field=models.CharField(default=True, max_length=255, verbose_name='Title'),
+            field=models.CharField(max_length=255, verbose_name='Title'),
         ),
     ]

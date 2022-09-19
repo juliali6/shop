@@ -54,15 +54,15 @@ class LatestProducts:
 class CategoryManager(models.Manager):
 
     CATEGORY_NAME_COUNT_NAME ={
-        'Notebooks': 'notebook__count',
-        'Smartphones': 'smartphone__count',
+        'Notebooks': 'product__count',
+        'Smartphones': 'product__count',
     }
 
     def get_category(self):
         return super().get_queryset()
 
     def get_categories_for_left_sidebar(self):
-        models = get_models_for_count('notebook', 'smartphone')
+        models = get_models_for_count('product')
         qs = list(self.get_queryset().annotate(*models))
         data = [
             dict(name=c.name, url=c.get_absolute_url(), count=getattr(c, self.CATEGORY_NAME_COUNT_NAME[c.name]))
@@ -90,15 +90,12 @@ class Product(models.Model):
     MAX_RESOLUTION = (800, 800)
     MAX_IMAGE_SIZE = 10485760
 
-    class Meta:
-        abstract = True
-
-    category = models.ForeignKey(Category, verbose_name='Category', on_delete=models.CASCADE, default=True)
-    title = models.CharField(max_length=255, verbose_name='Title', default=True)
-    slug = models.SlugField(unique=True, default=True)
-    image = models.ImageField(verbose_name='Image', default=True)
+    category = models.ForeignKey(Category, verbose_name='Category', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, verbose_name='Title')
+    slug = models.SlugField(unique=True)
+    image = models.ImageField(verbose_name='Image')
     description = models.TextField(verbose_name='Description', null=True)
-    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Price', default=True)  # decimal_places к-л цифр после запятой
+    price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Price')  # decimal_places к-л цифр после запятой
 
     def __str__(self):
         return self.title
@@ -116,6 +113,8 @@ class Product(models.Model):
         if img.height > max_height or img.width > max_width:
             raise MaxResolutionErrorException('Image is bigger than maximum resolution!')
         super().save(*args, **kwargs)
+
+
 
 
 

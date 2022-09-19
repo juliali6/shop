@@ -1,7 +1,9 @@
-from category_app.views import BaseView, ProductDetailView, CategoryDetailView
 
 from django.urls import path, include
 from .api.views.router import api_router
+from .views.base import BaseView
+from .views.category import CategoryDetailView
+from .views.product import ProductDetailView
 
 urlpatterns = [
     path('', BaseView.as_view(), name='base'),
