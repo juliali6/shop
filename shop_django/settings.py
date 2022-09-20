@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from datetime import timedelta
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,8 +26,6 @@ SECRET_KEY = 'django-insecure-p-rp%rwoy57$^m%hj*4&$z1m$5v7z*r4gr)az)05os$4q5do69
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -52,6 +51,7 @@ INSTALLED_APPS = [
     'user_app',
     'profile_app',
     'reviews_app',
+    'media_app',
 
 ]
 
@@ -103,6 +103,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'CONN_MAX_AGE': 60,
     }
 }
 
@@ -193,3 +194,9 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+#  heroku
+
+ALLOWED_HOSTS = ['*']
+
+django_heroku.settings(locals())
