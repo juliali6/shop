@@ -200,3 +200,4 @@ SIMPLE_JWT = {
 ALLOWED_HOSTS = ['*']
 
 django_heroku.settings(locals())
+
