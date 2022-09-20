@@ -114,6 +114,9 @@ class Product(models.Model):
             raise MaxResolutionErrorException('Image is bigger than maximum resolution!')
         super().save(*args, **kwargs)
 
+    def get_review(self):
+        return self.reviews_set.filter(parent__isnull=True)
+
 
 
 
