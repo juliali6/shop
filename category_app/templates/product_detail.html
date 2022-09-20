@@ -95,10 +95,6 @@
                     <p class="mt-2 editContent">
                         {{ review.text }}
                     </p>
-
-    {% if review.file %}
-        <div><a href="{{ review.file.file.url }}" target="_blank"><img src="{{ review.file.file.url }}" alt="" width="350px" height="350px"></a></div>
-    {% endif %}
                     <a href="#formReview" onclick="addReview('{{ review.name }}', '{{ review.id }}')">Reply</a>
                     {% for rew in review.reviews_set.all %}
                     <div class="media mt-5 editContent">
