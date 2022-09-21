@@ -13,6 +13,8 @@ class AddReview(View):
         product = Product.objects.get(id=pk)
         if form.is_valid():
             form = form.save(commit=False)
+            if request.POST.get("parent", None):
+                form.parent_id = int(request.POST.get("parent"))
             form.product = product
             form.save()
         return redirect('/')
