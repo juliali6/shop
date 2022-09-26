@@ -3,6 +3,7 @@ from django.views.generic import DetailView
 from cartproduct_app.mixins import CartMixin
 from category_app.mixins import CategoryDetailMixin
 from notebooks_app.models import Notebook
+from rating_app.forms.rating import RatingForm
 from smartphones_app.models import Smartphone
 
 
@@ -28,4 +29,5 @@ class ProductDetailView(CartMixin, CategoryDetailMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['ct_model'] = self.model._meta.model_name
         context['cart'] = self.cart
+        context['star_form'] = RatingForm
         return context

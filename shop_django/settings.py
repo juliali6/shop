@@ -14,6 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 import django_heroku
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'profile_app',
     'reviews_app',
     'media_app',
+    'rating_app',
 
 ]
 
@@ -73,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'shop_django.urls'
