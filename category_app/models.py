@@ -72,6 +72,7 @@ class CategoryManager(models.Manager):
 
 
 class Category(models.Model):
+    """Класс категорий товаров: смартфонов и ноутбуков"""
 
     name = models.CharField(max_length=255, verbose_name='Name of category')
     slug = models.SlugField(unique=True)
@@ -85,6 +86,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    """Базовый класс модели продуктов: смартфонов и ноутбуков"""
 
     MIN_RESOLUTION = (400, 400)
     MAX_RESOLUTION = (800, 800)
@@ -96,6 +98,7 @@ class Product(models.Model):
     image = models.ImageField(verbose_name='Image')
     description = models.TextField(verbose_name='Description', null=True)
     price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Price')  # decimal_places к-л цифр после запятой
+    favourites = models.ManyToManyField(User, related_name='favorite', default=None, blank=True)
 
     def __str__(self):
         return self.title

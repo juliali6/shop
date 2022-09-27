@@ -9,7 +9,8 @@ from customer_app.models import Customer
 
 
 class MakeOrderView(CartMixin, View):
-    """Класс оформления заказа."""
+    """Класс оформления заказа.
+    Сообщение об успешном оформлении заказа"""
 
     @transaction.atomic
     def post(self, request, *args, **kwargs):

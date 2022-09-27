@@ -25,6 +25,6 @@ class Reviews(models.Model):
 
 
 class MediaReview(models.Model):
-    """Модель изображений в постах"""
+    """Модель изображений в отзывах"""
     reviews = models.ForeignKey(Reviews, on_delete=models.CASCADE)
     image_reviews = models.ImageField(null=False, blank=True)
