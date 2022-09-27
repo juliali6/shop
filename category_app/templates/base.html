@@ -41,6 +41,10 @@
           </li>
         </ul>
       </div>
+
+<!--кнопка избранных товаров-->
+<a class="nav-link" href="{% url 'favourite_list' %}">Favorite <span class="badge badge-pill badge-danger"></span></a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -52,21 +56,21 @@
     </div>
   </nav>
 
-  <!-- Page Content -->
-  <div class="container">
+<!-- Page Content -->
+<div class="container">
 
-    <div class="row">
+  <div class="row">
 
-      <div class="col-lg-3">
+    <div class="col-lg-3">
 
-          <h1 class="my-4">Electric shop</h1>
-        <div class="list-group">
-          {% for category in categories %}
-            <a href="{{ category.url }}" class="list-group-item">{{ category.name }} ({{ category.count }})</a>
-          {% endfor %}
-        </div>
-
+        <h1 class="my-4">Electric shop</h1>
+      <div class="list-group">
+        {% for category in categories %}
+          <a href="{{ category.url }}" class="list-group-item">{{ category.name }} ({{ category.count }})</a>
+        {% endfor %}
       </div>
+
+    </div>
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">

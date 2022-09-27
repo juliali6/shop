@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <hr>
+
+<!--{% if request.user.is_authenticated %}-->
+<!--{% else %}-->
+<!--<h3>To add a favorites, you need to log in or register.</h3>-->
+<!--    <p><a href="{% url 'login' %}">Авторизация</a></p>-->
+<!--    <p><a href="{% url 'registration' %}">Регистрация</a></p>-->
+<!--{% endif %}-->
+
  {% if favourite_list %}
   {% for product in favourite_list  %}
 
@@ -30,6 +39,7 @@
   {% else %}
   <p class="card-text">No products have been added to your wishlist yet</p>
   {% endif %}
+
 
 
 {% endblock content %}
