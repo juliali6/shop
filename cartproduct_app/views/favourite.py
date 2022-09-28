@@ -2,16 +2,25 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.views import View
 
-from category_app.models import Product
+from cartproduct_app.mixins import CartMixin
+from category_app.models import Product, Category
 
 
-@login_required
-def favourite_list(request):
-    """Метод отображения избранных товаров"""
+class FavouriteList(CartMixin, View):
+    """Класс отображения избранных товаров"""
 
-    product_fav = Product.objects.filter(favourites=request.user)
-    return render(request, 'favourite.html', {'favourite_list': product_fav})
+    def get(self, request):
+
+        product_fav = Product.objects.filter(favourites=request.user)
+        categories = Category.objects.get_categories_for_left_sidebar()
+        context = {
+            'favourite_list': product_fav,
+            'categories': categories,
+            'cart': self.cart
+        }
+        return render(request, 'favourite.html', context)
 
 
 @login_required

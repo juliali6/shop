@@ -6,6 +6,7 @@ from category_app.models import Category
 
 
 class CategoryDetailView(CartMixin, CategoryDetailMixin, DetailView):
+    """Класс для отображения товара в списке."""
 
     model = Category
     queryset = Category.objects.all()

@@ -62,6 +62,8 @@ class CategoryManager(models.Manager):
         return super().get_queryset()
 
     def get_categories_for_left_sidebar(self):
+        """Метод для отображения категорий товаров на разных страницах."""
+
         models = get_models_for_count('product')
         qs = list(self.get_queryset().annotate(*models))
         data = [
@@ -86,7 +88,8 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    """Базовый класс модели продуктов: смартфонов и ноутбуков"""
+    """Базовый класс модели продуктов: смартфонов и ноутбуков.
+    Ограничение размера изображений."""
 
     MIN_RESOLUTION = (400, 400)
     MAX_RESOLUTION = (2000, 2000)

@@ -4,6 +4,8 @@ from django.db import models
 
 
 class User(AbstractUser, PermissionsMixin):
+    """Класс абстрактого юзера."""
+
     email = models.EmailField(max_length=255, unique=True)
     # phone = models.CharField(
     #     validators=[RegexValidator(regex=r'^\+?1?\d{9,15}$')],

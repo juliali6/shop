@@ -12,7 +12,7 @@ class LoginView(CartMixin, View):
 
     def get(self, request, *args, **kwargs):
         form = LoginForm(request.POST or None)
-        categories = Category.objects.all()
+        categories = Category.objects.get_categories_for_left_sidebar()
         context = {
             'form': form,
             'categories': categories,

@@ -4,6 +4,8 @@ from category_app.models import Product, get_product_url
 
 
 class Notebook(Product):
+    """Класс модели ноутбуков.
+    Характеристики."""
 
     diagonal = models.CharField(max_length=255, verbose_name='Diagonal')
     display_type = models.CharField(max_length=255, verbose_name='Display type')
