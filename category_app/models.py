@@ -89,7 +89,7 @@ class Product(models.Model):
     """Базовый класс модели продуктов: смартфонов и ноутбуков"""
 
     MIN_RESOLUTION = (400, 400)
-    MAX_RESOLUTION = (800, 800)
+    MAX_RESOLUTION = (2000, 2000)
     MAX_IMAGE_SIZE = 10485760
 
     category = models.ForeignKey(Category, verbose_name='Category', on_delete=models.CASCADE)
