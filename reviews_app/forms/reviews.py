@@ -1,6 +1,6 @@
 from django import forms
 
-from reviews_app.models import Reviews, MediaReview
+from reviews_app.models import Reviews
 
 
 class ReviewForm(forms.ModelForm):
@@ -8,10 +8,12 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Reviews
-        fields = ("name", "email", "text")
+        fields = ("name", "email", "text",)
 
 
-class ImageForm(forms.ModelForm):
-    class Meta:
-        model = MediaReview
-        fields = ('image_reviews',)
+class ReviewImageForm(ReviewForm):
+
+    image = forms.ImageField(required=False)
+
+    class Meta(ReviewForm.Meta):
+        fields = ReviewForm.Meta.fields + ('image',)

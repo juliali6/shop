@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<!--добавление и просмотр отзывов-->
+{% if request.user.is_authenticated %}
+<div class="row">
+    <div class="single-form-left">
+        <!-- contact form grid -->
+        <div class="contact-single">
+            <h3 class="editContent">
+                <span class="sub-tittle editContent"></span>Your review</h3>
+            <form>
+                {% csrf_token %}
+                    {{ form|crispy }}
+        <p><input type="submit" value="Save"></p>
+            </form>
+        </div>
+        <!--  //contact form grid ends here -->
+    </div>
+</div>
+
+
+<!--запрет на добавление отзывов незарегистрирвонным пользователям-->
+{% else %}
+<h3>To add a review, you need to log in or register.</h3>
+{% endif %}
+
+{% endblock content %}

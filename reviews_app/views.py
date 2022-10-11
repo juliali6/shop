@@ -1,16 +1,20 @@
 from django.shortcuts import render, redirect
 from django.views import View
 
-from category_app.models import Product
-from reviews_app.forms.reviews import ReviewForm, ImageForm
+from cartproduct_app.mixins import CartMixin
+from category_app.models import Product, Category
+from reviews_app.forms.reviews import ReviewForm, ReviewImageForm
+from reviews_app.models import Reviews, MediaReview
 
 
 class AddReview(View):
-    """View добавления отзывов"""
+    """Класс вью добавления отзывов"""
 
     def post(self, request, pk):
+
         form = ReviewForm(request.POST)
         product = Product.objects.get(id=pk)
+
         if form.is_valid():
             form = form.save(commit=False)
             if request.POST.get("parent", None):
@@ -20,15 +24,47 @@ class AddReview(View):
         return redirect('/')
 
 
-def image_upload_view(request):
-    """Process images uploaded by users"""
-    if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            # Get the current instance object to display in the template
-            img_obj = form.instance
-            return render(request, 'product_detail.html', {'form': form, 'img_obj': img_obj})
-    else:
-        form = ImageForm()
-    return render(request, 'product_detail.html', {'form': form})
+# class ReviewImageAdd(CartMixin, View):
+#
+#     def get(self, request):
+#         form = ReviewImageForm()
+#         categories = Category.objects.get_categories_for_left_sidebar()
+#
+#         context = {
+#             'title': 'Add a new review',
+#             'form': form,
+#             'categories': categories,
+#             'cart': self.cart
+#         }
+#
+#         return render(request, 'review.html', context)
+#
+#     @staticmethod
+#     def post(request):
+#         form_image = ReviewImageForm(request.POST, request.FILES)
+#         files = request.FILES.getlist('image')
+#
+#         if len(files) > 5:
+#             return render(request, 'product_detail.html', context={
+#                 'title': 'Add review',
+#                 'form': form_image,
+#                 'error': 'Maximum 5 files!'
+#             })
+#
+#         if form_image.is_valid():
+#             review_object = form_image.save(commit=False)
+#             review_object.user = request.user
+#             review_object.save()
+#             for f in files:
+#                 MediaReview.objects.create(review=review_object, image=f)
+#             return redirect('/')
+#
+#         context = {
+#             'create_review': form_image,
+#         }
+#
+#         return render(request, 'product_detail.html', context)
+
+
+
+

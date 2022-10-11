@@ -1,10 +1,10 @@
 from django import forms
-from django.contrib.auth import get_user_model
 
 from user_app.models import User
 
 
 class RegistrationForm(forms.ModelForm):
+    """Форма для регистрации пользователей"""
 
     confirm_password = forms.CharField(widget=forms.PasswordInput)
     password = forms.CharField(widget=forms.PasswordInput)
@@ -25,11 +25,6 @@ class RegistrationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        domain = email.split('.')[-1]
-        if domain in ['com', 'net']:
-            raise forms.ValidationError(
-                f'Registration for domain {domain} is not possible'
-            )
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError(
                 f'This email address is already registered in the system'

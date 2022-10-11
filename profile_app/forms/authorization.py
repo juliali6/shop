@@ -4,6 +4,7 @@ from user_app.models import User
 
 
 class LoginForm(forms.ModelForm):
+    """Форма для авторизации пользователей"""
 
     password = forms.CharField(widget=forms.PasswordInput)
 

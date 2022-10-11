@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+
 <h3 class="text-center mt-5 mb-5">Your cart {% if not cart.products.count %}Empty{% endif %}</h3>
 
 <!--сообщение об успешном добавлении товара в корзину-->
@@ -61,6 +63,9 @@
   </tbody>
 </table>
 
+
+
 {% endif %}
+
 
 {% endblock content %}
