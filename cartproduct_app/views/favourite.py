@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.views import View
@@ -8,8 +9,10 @@ from cartproduct_app.mixins import CartMixin
 from category_app.models import Product, Category
 
 
-class FavouriteList(CartMixin, View):
+class FavouriteList(LoginRequiredMixin, CartMixin, View):
     """Представление избранных товаров"""
+
+    login_url = 'login'  # переадресация для неавторизованных пользователей
 
     def get(self, request):
 
@@ -23,7 +26,7 @@ class FavouriteList(CartMixin, View):
         return render(request, 'favourite.html', context)
 
 
-@login_required
+@login_required(login_url='login')
 def favourite_add(request, id):
     """Метод добавления избранных товаров"""
 
