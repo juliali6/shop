@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -21,6 +22,7 @@ class AddReview(View):
                 form.parent_id = int(request.POST.get("parent"))
             form.product = product
             form.save()
+            messages.add_message(request, messages.INFO, 'Thanks for your review')
         return redirect('/')
 
 
