@@ -4,7 +4,7 @@ from user_app.models import User
 
 
 class LoginForm(forms.ModelForm):
-    """Форма для авторизации пользователей"""
+    """Форма авторизации пользователей"""
 
     password = forms.CharField(widget=forms.PasswordInput)
 
@@ -13,11 +13,15 @@ class LoginForm(forms.ModelForm):
         fields = ['username', 'password']
 
     def __init__(self, *args, **kwargs):
+        """Метод проверки совпадения логина и пароля"""
+
         super().__init__(*args, **kwargs)
         self.fields['username'].label = 'Login'
         self.fields['password'].label = 'Password'
 
     def clean(self):
+        """Метод проверки корректных данных логина и пароля пользователя"""
+
         username = self.cleaned_data['username']
         password = self.cleaned_data['password']
         if not User.objects.filter(username=username).exists():

@@ -6,6 +6,7 @@ from customer_app.models import Customer
 
 
 class CustomerView(GenericViewSet, RetrieveModelMixin, ListModelMixin, CreateModelMixin, UpdateModelMixin):
+    """Представление покупателей."""
 
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()

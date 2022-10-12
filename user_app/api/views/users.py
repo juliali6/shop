@@ -6,5 +6,7 @@ from ...models import User
 
 
 class UserViewSet(GenericViewSet, RetrieveModelMixin, ListModelMixin):
+    """Представление регистрации юзера"""
+
     queryset = User.objects.all()
     serializer_class = UserSerializer

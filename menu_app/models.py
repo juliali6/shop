@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Menu(models.Model):
-    """Model for menu."""
+    """Модель меню."""
 
     menu_label = models.CharField(max_length=256, null=False, blank=False, unique=True)
 
@@ -12,7 +12,7 @@ class Menu(models.Model):
 
 
 class MenuItem(models.Model):
-    """Model for menu items."""
+    """Модель menu-item."""
 
     menu = models.ForeignKey(Menu, null=False, blank=False, on_delete=models.PROTECT, related_name='links')
     title = models.CharField(max_length=32, null=False, blank=False)

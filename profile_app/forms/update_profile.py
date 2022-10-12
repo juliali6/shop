@@ -5,7 +5,8 @@ from profile_app.models import Profile
 
 
 class UpdateProfileForm(forms.ModelForm):
-    """Form for update profile."""
+    """Форма редактирования профиля:
+    'имя','фамилия' и 'электронная почта'."""
 
     class Meta:
         model = User
@@ -13,7 +14,8 @@ class UpdateProfileForm(forms.ModelForm):
 
 
 class UpdateProForm(forms.ModelForm):
-    """Form for update profile."""
+    """Форма редактирования профиля:
+    'аватар', 'номер телефона'."""
 
     class Meta:
         model = Profile

@@ -5,6 +5,7 @@ from notebooks_app.models import Notebook
 
 
 class NotebookSerializer(BaseProductSerializer, serializers.ModelSerializer):
+    """Сериалайзер категории 'наутбуков'."""
 
     diagonal = serializers.CharField(required=True)
     display_type = serializers.CharField(required=True)

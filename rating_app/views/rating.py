@@ -6,7 +6,7 @@ from rating_app.models import Rating
 
 
 class AddStarRating(View):
-    """Добавление рейтинга фильму"""
+    """Добавление рейтинга к товару."""
 
     def get_client_ip(self, request):
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

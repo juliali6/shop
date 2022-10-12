@@ -12,6 +12,7 @@ class ReviewForm(forms.ModelForm):
 
 
 class ReviewImageForm(ReviewForm):
+    """Форма отзывов с возможностью добавления картинок"""
 
     image = forms.ImageField(required=False)
 

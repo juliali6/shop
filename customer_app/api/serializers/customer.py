@@ -4,6 +4,7 @@ from customer_app.models import Customer, Order
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    """Сериалайзер оформления заказов. """
 
     class Meta:
         model = Order
@@ -11,6 +12,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
 
 class CustomerSerializer(serializers.ModelSerializer):
+    """Сериалайзер покупателей."""
 
     orders = OrderSerializer(many=True)
 

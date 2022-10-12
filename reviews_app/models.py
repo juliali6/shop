@@ -1,7 +1,6 @@
 from django.db import models
 
 from category_app.models import Product
-from user_app.models import User
 
 
 class Reviews(models.Model):

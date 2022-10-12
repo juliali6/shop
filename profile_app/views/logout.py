@@ -4,7 +4,7 @@ from django.views import View
 
 
 class LogoutUser(View):
-    """View for logging out."""
+    """Представление для выхода из аккаунта"""
 
     def get(self, request):
         logout(request)

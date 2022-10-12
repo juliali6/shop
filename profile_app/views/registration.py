@@ -10,6 +10,7 @@ from profile_app.forms.registration import RegistrationForm
 
 
 class RegistrationView(CartMixin, View):
+    """Представление регистрации"""
 
     def get(self, request, *args, **kwargs):
         form = RegistrationForm(request.POST or None)

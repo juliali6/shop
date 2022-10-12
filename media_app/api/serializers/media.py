@@ -4,6 +4,8 @@ from media_app.models import Media
 
 
 class MediaSerializer(serializers.ModelSerializer):
+    """Сериазайзер медиа."""
+
     class Meta:
         model = Media
         fields = '__all__'

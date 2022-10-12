@@ -7,6 +7,7 @@ from customer_app.forms.order import OrderForm
 
 
 class CheckoutView(CartMixin, View):
+    """Представление оформления заказа."""
 
     def get(self, request, *args, **kwargs):
         categories = Category.objects.get_categories_for_left_sidebar()

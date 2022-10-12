@@ -9,7 +9,7 @@ from category_app.models import Product, Category
 
 
 class FavouriteList(CartMixin, View):
-    """Класс отображения избранных товаров"""
+    """Представление избранных товаров"""
 
     def get(self, request):
 

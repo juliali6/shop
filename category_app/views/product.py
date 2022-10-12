@@ -36,6 +36,9 @@ class ProductDetailView(CartMixin, CategoryDetailMixin, DetailView):
 
 
 def product(request, product_id):
+    """Метод представления последних просмотренных товаров.
+    Макс. к-л 5 товаров."""
+
     product = Product.objects.get(pk=product_id)
     recently_viewed_products = None
 

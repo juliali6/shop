@@ -4,6 +4,7 @@ from category_app.models import Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    """Сериалайзер категорий."""
 
     name = serializers.CharField(required=True)
     slug = serializers.SlugField()
@@ -16,6 +17,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class BaseProductSerializer:
+    """Базовый сериалайзер товаров."""
 
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects)
     title = serializers.CharField(required=True)

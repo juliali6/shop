@@ -8,6 +8,7 @@ from smartphones_app.models import Smartphone
 
 
 class SmartphoneView(GenericViewSet, RetrieveModelMixin, ListModelMixin, CreateModelMixin, UpdateModelMixin):
+    """Представление категории 'смартфонов'."""
 
     serializer_class = SmartphoneSerializer
     queryset = Smartphone.objects.all()

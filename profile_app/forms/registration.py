@@ -4,7 +4,7 @@ from user_app.models import User
 
 
 class RegistrationForm(forms.ModelForm):
-    """Форма для регистрации пользователей"""
+    """Форма регистрации пользователей"""
 
     confirm_password = forms.CharField(widget=forms.PasswordInput)
     password = forms.CharField(widget=forms.PasswordInput)
@@ -24,6 +24,8 @@ class RegistrationForm(forms.ModelForm):
         self.fields['email'].label = 'Email'
 
     def clean_email(self):
+        """Метод проверки email пользователя"""
+
         email = self.cleaned_data['email']
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError(
@@ -32,6 +34,8 @@ class RegistrationForm(forms.ModelForm):
         return email
 
     def clean_username(self):
+        """Метод проверки имени пользователя"""
+
         username = self.cleaned_data['username']
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError(
@@ -40,6 +44,8 @@ class RegistrationForm(forms.ModelForm):
         return username
 
     def clean(self):
+        """Метод проверки пароля"""
+
         password = self.cleaned_data['password']
         confirm_password = self.cleaned_data['confirm_password']
         if password != confirm_password:

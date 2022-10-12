@@ -7,6 +7,7 @@ from notebooks_app.models import Notebook
 
 
 class NotebookView(GenericViewSet, RetrieveModelMixin, ListModelMixin, CreateModelMixin, UpdateModelMixin):
+    """Представление категории 'ноутбуков'."""
 
     serializer_class = NotebookSerializer
     queryset = Notebook.objects.all()

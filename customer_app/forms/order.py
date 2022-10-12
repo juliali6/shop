@@ -4,6 +4,7 @@ from ..models import Order
 
 
 class OrderForm(forms.ModelForm):
+    """Форма оформления заказа."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

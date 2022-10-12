@@ -5,6 +5,7 @@ from smartphones_app.models import Smartphone
 
 
 class SmartphoneSerializer(BaseProductSerializer, serializers.ModelSerializer):
+    """Сериалайзер категории 'смартфонов'."""
 
     diagonal = serializers.CharField(required=True)
     display_type = serializers.CharField(required=True)

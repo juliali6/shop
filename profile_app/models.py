@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Profile(models.Model):
-    """Модель для профиля пользователя."""
+    """Модель профиля пользователя."""
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     avatar = models.ImageField(blank=True, null=True)

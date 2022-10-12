@@ -7,7 +7,7 @@ from profile_app.models import Profile
 
 
 class ProfileUserView(CartMixin, View):
-    """Вью для отображения профиля."""
+    """Представление отображения профиля."""
 
     def get(self, request):
         if request.user.is_authenticated:

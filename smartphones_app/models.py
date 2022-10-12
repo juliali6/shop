@@ -25,8 +25,3 @@ class Smartphone(Product):
     def get_absolute_url(self):
         return get_product_url(self, 'product_detail')
 
-    # @property
-    # def sd_card(self):
-    #     if self.sd:
-    #         return 'Yes'
-    #     return 'No'

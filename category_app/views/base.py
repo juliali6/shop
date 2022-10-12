@@ -6,7 +6,7 @@ from category_app.models import Category, LatestProducts
 
 
 class BaseView(CartMixin, View):
-    """Основной класс View"""
+    """Основной класс представления"""
 
     def get(self, request, *args, **kwargs):
         categories = Category.objects.get_categories_for_left_sidebar()

@@ -9,6 +9,8 @@ User = get_user_model()
 
 
 class Customer(models.Model):
+    """Модель покупателя.
+    Характеристики."""
 
     user = models.ForeignKey(User, verbose_name='User', on_delete=models.CASCADE)
     phone = models.CharField(max_length=20, verbose_name='Phone number', null=True, blank=True)
@@ -21,6 +23,7 @@ class Customer(models.Model):
 
 
 class Order(models.Model):
+    """Модель оформления заказа."""
 
     STATUS_NEW = 'new'
     STATUS_IN_PROGRESS = 'in_progress'

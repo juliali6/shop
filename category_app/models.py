@@ -110,6 +110,8 @@ class Product(models.Model):
         return self.__class__.__name__.lower()
 
     def save(self, *args, **kwargs):
+        """Метод проверки размера картинки соответствия требованиям."""
+
         image = self.image
         img = Image.open(image)
         min_height, min_width = self.MIN_RESOLUTION

@@ -1,12 +1,11 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
+from cartproduct_app.views.add_to_cart import AddToCartView
+from cartproduct_app.views.cart_delete import DeleteFromCartView
 from cartproduct_app.views.favourite import favourite_add, FavouriteList
-from cartproduct_app.views.cart import \
-    CartView, \
-    AddToCartView, \
-    DeleteFromCartView, \
-    ChangeQTYView
+from cartproduct_app.views.cart import CartView
+from cartproduct_app.views.qty_cart import ChangeQTYView
 
 urlpatterns = [
     path('cart/', CartView.as_view(), name='cart'),

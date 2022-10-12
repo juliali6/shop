@@ -6,5 +6,7 @@ from ...models import Media
 
 
 class MediaViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin):
+    """Представление медиа."""
+
     serializer_class = MediaSerializer
     queryset = Media.objects.all()

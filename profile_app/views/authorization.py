@@ -9,6 +9,7 @@ from profile_app.forms.authorization import LoginForm
 
 
 class LoginView(CartMixin, View):
+    """Представление логина для авторизации пользователя"""
 
     def get(self, request, *args, **kwargs):
         form = LoginForm(request.POST or None)

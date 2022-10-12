@@ -7,7 +7,7 @@ from profile_app.forms.update_profile import UpdateProfileForm, UpdateProForm
 
 
 class UserUpdate(CartMixin, View):
-    """Вью для редактирования профиля."""
+    """Представление редактирования профиля."""
 
     def get(self, request):
         user_form = UpdateProfileForm(instance=request.user)

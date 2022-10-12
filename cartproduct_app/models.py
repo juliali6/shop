@@ -4,6 +4,8 @@ from django.db import models
 
 
 class CartProduct(models.Model):
+    """Модель корзины.
+    Характеристики."""
 
     user = models.ForeignKey('customer_app.Customer', verbose_name='Customer', on_delete=models.CASCADE)
     cart = models.ForeignKey('Cart', verbose_name='Cart', on_delete=models.CASCADE, related_name='related_products')
@@ -22,6 +24,7 @@ class CartProduct(models.Model):
 
 
 class Cart(models.Model):
+    """Модель оформения товара через корзину."""
 
     owner = models.ForeignKey('customer_app.Customer', null=True, verbose_name='Owner', on_delete=models.CASCADE)  # владелец
     products = models.ManyToManyField(CartProduct, blank=True, related_name='related_cart')
