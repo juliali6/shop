@@ -1,5 +1,4 @@
 from django.urls import path
-from django.contrib.auth.decorators import login_required
 
 from cartproduct_app.views.add_to_cart import AddToCartView
 from cartproduct_app.views.cart_delete import DeleteFromCartView
