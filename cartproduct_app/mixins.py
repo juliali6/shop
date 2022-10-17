@@ -1,4 +1,4 @@
-from django.views import View
+from django.views.generic import View
 
 from cartproduct_app.models import Cart
 from customer_app.models import Customer
