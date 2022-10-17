@@ -4,43 +4,34 @@
 
 <hr>
 
-{% if request.user.is_authenticated %}
+{% if favourite_list %}
+{% for product in favourite_list  %}
 
- {% if favourite_list %}
-  {% for product in favourite_list  %}
-
-  <div class="card mb-3 rounded-0">
-    <div class="row g-0">
-      <div class="col-md-2">
-        {% for image in product.product_image.all  %}
-          {% if image.image %}
-          <img class="img-fluid d-block p-2" width="135px" src="{{ image.image.url }}"
-            alt="{{ image.image.alt_text }}" />
-          {% endif %}
-        {% endfor %}
-      </div>
-      <div class="col-md-10">
-        <div class="card-body">
-          <h5 class="card-title">{{product.title}}</h5>
-          <p class="card-text">{{product.description}}</p>
-          <p class="card-text"><small class="text-muted">{{product.price}} $</small></p>
-          <a type="button" class="btn btn-primary fw500 btn-sm" href="{% url 'favourite_add' product.id %}">Remove from Wishlist</a>
-        </div>
-      </div>
+<div class="card mb-3 rounded-0">
+<div class="row g-0">
+  <div class="col-md-2">
+    {% for image in product.product_image.all  %}
+      {% if image.image %}
+      <img class="img-fluid d-block p-2" width="135px" src="{{ image.image.url }}"
+        alt="{{ image.image.alt_text }}" />
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="col-md-10">
+    <div class="card-body">
+      <h5 class="card-title">{{product.title}}</h5>
+      <p class="card-text">{{product.description}}</p>
+      <p class="card-text"><small class="text-muted">{{product.price}} $</small></p>
+      <a type="button" class="btn btn-primary fw500 btn-sm" href="{% url 'favourite_add' product.id %}">Remove from favourite list</a>
     </div>
   </div>
+</div>
+</div>
 
-  {% endfor %}
-  {% else %}
-  <p class="card-text">No products have been added to your wishlist yet</p>
-  {% endif %}
-
+{% endfor %}
 {% else %}
-    <h3>To add a favorites, you need to log in or register.</h3>
-    <p><a href="{% url 'login' %}">Авторизация</a></p>
-    <p><a href="{% url 'registration' %}">Регистрация</a></p>
+<p class="card-text">No products have been added to your wishlist yet</p>
 {% endif %}
-
 
 
 {% endblock content %}
