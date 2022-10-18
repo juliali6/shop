@@ -3,13 +3,24 @@
 {% block content %}
 
 <hr>
-
+    <nav aria-label="breadcrumb" class="mt-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'base' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ product.category.get_absolute_url }}"></a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+    </ol>
+</nav>
 {% if favourite_list %}
 {% for product in favourite_list  %}
 
 <div class="card mb-3 rounded-0">
 <div class="row g-0">
   <div class="col-md-2">
+
+
+      <a href="{{ product.get_absolute_url }}"><img class="card-img-top" src="{{ product.image.url }}" alt=""></a>
+
+
     {% for image in product.product_image.all  %}
       {% if image.image %}
       <img class="img-fluid d-block p-2" width="135px" src="{{ image.image.url }}"
@@ -19,7 +30,7 @@
   </div>
   <div class="col-md-10">
     <div class="card-body">
-      <h5 class="card-title">{{product.title}}</h5>
+          <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
       <p class="card-text">{{product.description}}</p>
       <p class="card-text"><small class="text-muted">{{product.price}} $</small></p>
       <a type="button" class="btn btn-primary fw500 btn-sm" href="{% url 'favourite_add' product.id %}">Remove from favourite list</a>

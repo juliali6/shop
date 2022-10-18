@@ -4,7 +4,7 @@ from .api.views.router import api_router
 from .views.base import BaseView
 from .views.category_detail import CategoryDetailView
 from .views.product import product
-from .views.ptoduct_detail import ProductDetailView
+from .views.product_detail import ProductDetailView
 
 urlpatterns = [
     path('', BaseView.as_view(), name='base'),
