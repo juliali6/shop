@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import path
+from django.urls import path, include
 
+from profile_app.api.views.router import api_router
 from profile_app.views.authorization import LoginView
 from profile_app.views.logout import LogoutUser
 from profile_app.views.profile import ProfileUserView
@@ -13,4 +14,5 @@ urlpatterns = [
     path('logout', LogoutUser.as_view(), name='logout_page'),
     path('login', LoginView.as_view(), name='login'),
     path('profile', login_required(ProfileUserView.as_view()), name='profile_page'),
+    path('api/', include(api_router.urls)),
 ]
