@@ -1,4 +1,4 @@
-
+// Add star rating
 const rating = document.querySelector('form[name=rating]');
 
 rating.addEventListener("change", function (e) {
@@ -8,6 +8,6 @@ rating.addEventListener("change", function (e) {
         method: 'POST',
         body: data
     })
-        .then(response => alert("Rating set"))
-        .catch(error => alert("Error"))
+        .then(response => alert("Рейтинг установлен"))
+        .catch(error => alert("Ошибка"))
 });

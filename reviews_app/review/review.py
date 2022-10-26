@@ -1,70 +1,38 @@
-from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.views import View
 
-from cartproduct_app.mixins import CartMixin
-from category_app.models import Product, Category
-from reviews_app.forms.reviews import ReviewForm, ReviewImageForm
-from reviews_app.models import Reviews, MediaReview
+from profile_app.models import Profile
+from django.contrib.contenttypes.models import ContentType
+
+from django.contrib import messages
+
+from reviews_app.forms.reviews import ImageReviewForm
 
 
-class AddReview(View):
-    """Класс вью добавления отзывов"""
-
-    def post(self, request, pk):
-
-        form = ReviewForm(request.POST)
-        product = Product.objects.get(id=pk)
+def add_review(request, *args, **kwargs):
+    if request.method == "POST":
+        url = request.META.get('HTTP_REFERER')
+        form = ImageReviewForm(request.POST or None, request.FILES)
+        image = request.FILES.getlist('image')
+        if len(image) > 5:
+            context = {
+                "title": "Добавление нового поста",
+                "form": form,
+                "error": "Максимальное количество фотографии - 5",
+            }
+            return render(request, "product_detail.html", context)
 
         if form.is_valid():
-            form = form.save(commit=False)
-            if request.POST.get("parent", None):
-                form.parent_id = int(request.POST.get("parent"))
-            form.product = product
-            form.save()
-            messages.add_message(request, messages.INFO, 'Thanks for your review')
-        return redirect('/')
+            ct_model, product_slug = kwargs.get('ct_model'), kwargs.get('slug')
+            content_type = ContentType.objects.get(model=ct_model)
+            product = content_type.model_class().objects.get(slug=product_slug)
+            data = form.save(commit=False)
+            data.review = request.POST['review']
+            data.rating = request.POST['rating']
+            data.user = request.user
+            data.content_type = content_type
+            data.object_id = product.id
+            data.save()
 
+            messages.success(request, 'Спасибо, вы добавили отзыв!!!')
 
-# class ReviewImageAdd(CartMixin, View):
-#     """Представление добавления картинок к отзывам"""
-#
-#     def get(self, request):
-#         form = ReviewImageForm()
-#         categories = Category.objects.get_categories_for_left_sidebar()
-#
-#         context = {
-#             'title': 'Add a new review',
-#             'form': form,
-#             'categories': categories,
-#             'cart': self.cart
-#         }
-#
-#         return render(request, 'review.html', context)
-#
-#     @staticmethod
-#     def post(request):
-#         form_image = ReviewImageForm(request.POST, request.FILES)
-#         files = request.FILES.getlist('image')
-#
-#         if len(files) > 5:
-#             return render(request, 'product_detail.html', context={
-#                 'title': 'Add review',
-#                 'form': form_image,
-#                 'error': 'Maximum 5 files!'
-#             })
-#
-#         if form_image.is_valid():
-#             review_object = form_image.save(commit=False)
-#             review_object.user = request.user
-#             review_object.save()
-#             for f in files:
-#                 MediaReview.objects.create(review=review_object, image=f)
-#             return redirect('/')
-#
-#         context = {
-#             'create_review': form_image,
-#         }
-#
-#         return render(request, 'product_detail.html', context)
-
+            return redirect(url)

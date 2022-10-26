@@ -1,8 +1,10 @@
+from django.contrib.contenttypes.models import ContentType
 from django.views.generic import DetailView
 
 from cartproduct_app.mixins import CartMixin
 from category_app.mixins import CategoryDetailMixin
 from notebooks_app.models import Notebook
+from reviews_app.models import Reviews
 from smartphones_app.models import Smartphone
 
 
@@ -28,5 +30,7 @@ class ProductDetailView(CartMixin, CategoryDetailMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['ct_model'] = self.model._meta.model_name
+        content_type = ContentType.objects.get(model=self.model._meta.model_name).id
+        context['reviews'] = Reviews.objects.filter(content_type=content_type)
         context['cart'] = self.cart
         return context

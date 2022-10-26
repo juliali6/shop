@@ -8,13 +8,16 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Reviews
-        fields = ("name", "email", "text",)
+        fields = ['subject', 'review', 'rating']
 
 
-class ReviewImageForm(ReviewForm):
-    """Форма отзывов с возможностью добавления картинок"""
-
-    image = forms.ImageField(required=False)
+class ImageReviewForm(ReviewForm):
+    """Класс формы добавление изображение к посту"""
+    image = forms.ImageField(
+        label='Выберите фотографии(Не более 5)',
+        required=False,
+        widget=forms.ClearableFileInput(attrs={'multiple': True})
+    )
 
     class Meta(ReviewForm.Meta):
-        fields = ReviewForm.Meta.fields + ('image',)
+        fields = ReviewForm.Meta.fields + ['image', ]

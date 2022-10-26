@@ -17,6 +17,5 @@ class Profile(models.Model):
     about = models.TextField(max_length=4096, blank=True, null=True)
     github_link = models.URLField(blank=True, null=True)
 
-
-def __str__(self):
-    return str(self.user)
+    def __str__(self):
+        return f'Покупатель: {self.user.username}'

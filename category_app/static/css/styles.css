@@ -1,3 +1,17 @@
+ul.stars li {
+    display: inline-block;
+}
+
+ul.stars li a span {
+    font-size: 0.7em;
+    color: #6a6c6d;
+    margin: 0 0.2em;
+}
+
+ul.stars li a span:hover {
+    opacity: 0.8;
+}
+/* Checkbox stars */
 .rating {
   overflow: hidden;
   vertical-align: bottom;
@@ -31,3 +45,5 @@
 }
 
 .rating > label:hover:before,  .rating > label:hover ~ label:before,  .rating:not(:hover) > :checked ~ label:before { opacity: 1; }
+/* //Checkbox stars */
+
