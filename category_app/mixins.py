@@ -30,7 +30,7 @@ class ProductMixin(View):
 
     def dispatch(self, request, *args, **kwargs):
 
-        product_id = kwargs.get('id')
+        product_id = kwargs.get('slug')
 
         recently_viewed_products = None
 
