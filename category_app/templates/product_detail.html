@@ -33,22 +33,6 @@
 
         <hr>
 
-<!--рейтинг-->
-<!--<li>-->
-<!--    <form action="{% url 'add_rating' %}" method="post" name="rating">-->
-<!--        <b>Rating</b>-->
-<!--        {% csrf_token %}-->
-<!--        <input type="hidden" value="{{ product.id }}" name="product">-->
-<!--        <span class="rating">-->
-<!--            {% for k, v in star_form.fields.star.choices %}-->
-<!--                <input id="rating{{ v }}" type="radio" name="star"-->
-<!--                       value="{{ k }}">-->
-<!--                <label for="rating{{ v }}">{{ k }}</label>-->
-<!--            {% endfor %}-->
-<!--        </span>-->
-<!--        <span class="editContent">4.0</span>-->
-<!--    </form>-->
-<!--</li>-->
 
 <!--кнопка добавления в избранное-->
 <a href="{% url 'favourite_add' product.id %}" class="btn btn-light fw500" role="button" aria-disabled="true">Add to favorites</a>
@@ -62,6 +46,19 @@
 <p class="mt-4">Specification:</p>
 
 {{ product|product_spec }}
+
+<!--    посоедние просмотренные товары-->
+
+    <div class="container">
+
+  <br>
+  <h2>Recently Viewed:</h2>
+<div class="related">
+    {% for recent_product in recently_viewed_products %}
+  <img src="{{ recent_product.image.url }}" class="related_image" alt="">
+    {% endfor %}
+</div>
+</div>
 
 
 <!--добавление отзывов и рейтинга  -->
@@ -80,11 +77,11 @@
             <br>
             <div class="rate">
 
-                <input type="radio" name="rating" id="rating9" value="5" required /><label for="rating9" title="5">5</label>
-                <input type="radio" name="rating" id="rating7" value="4" required /><label for="rating7" title="4">4</label>
-                <input type="radio" name="rating" id="rating5" value="3" required /><label for="rating5" title="3">3</label>
-                <input type="radio" name="rating" id="rating3" value="2" required /><label for="rating3" title="2">2</label>
-                <input type="radio" name="rating" id="rating1" value="1" required /><label for="rating1" title="1">1</label>
+                <h1><input type="radio" name="rating" id="rating9" value="5" required /><label for="rating9" title="5">5</label></h1>
+                <h1><input type="radio" name="rating" id="rating7" value="4" required /><label for="rating7" title="4">4</label></h1>
+                <h1><input type="radio" name="rating" id="rating5" value="3" required /><label for="rating5" title="3">3</label></h1>
+                <h1><input type="radio" name="rating" id="rating3" value="2" required /><label for="rating3" title="2">2</label></h1>
+                <h1><input type="radio" name="rating" id="rating1" value="1" required /><label for="rating1" title="1">1</label></h1>
                 </div>
 <br>
             Review Title:
@@ -131,29 +128,29 @@
 <div class="row">
     <div class="col-md-6">
         <div class="product-reviews">
-                {% for c in reviews %}
-                <div class="single-review">
-                    <div class="review-heading">
+            {% for c in reviews %}
+            <div class="single-review">
+                <div class="review-heading">
 
-                        <div><i class="fa fa-user-o"></i> <b>{{ c.user }}</b></div>
-                        <div><a href="#"><i class="fa fa-clock-o"></i> {{ c.content_object }}</a></div>
-                        <div><img src="{{ c.image.url }}" class="img-fluid"></div>
-                        <div class="review-rating pull-right">
+                    <div><i class="fa fa-user-o"></i> <b>{{ c.user }}</b></div>
+                    <div><a href="#"><i class="fa fa-clock-o"></i> {{ c.content_object }}</a></div>
+                    <div><img src="{{ c.image.url }}" class="img-fluid"></div>
+                    <div class="review-rating pull-right">
 
-                            <i class="fa fa-star{% if c.rating < 1 %}-o empty{% endif %}"></i>
-                            <i class="fa fa-star{% if c.rating < 2 %}-o empty{% endif %}"></i>
-                            <i class="fa fa-star{% if c.rating < 3 %}-o empty{% endif %}"></i>
-                            <i class="fa fa-star{% if c.rating < 4 %}-o empty{% endif %}"></i>
-                            <i class="fa fa-star{% if c.rating < 5 %}-o empty{% endif %}"></i>
+                        <i class="fa fa-star{% if c.rating < 1 %}-o empty{% endif %}"></i>
+                        <i class="fa fa-star{% if c.rating < 2 %}-o empty{% endif %}"></i>
+                        <i class="fa fa-star{% if c.rating < 3 %}-o empty{% endif %}"></i>
+                        <i class="fa fa-star{% if c.rating < 4 %}-o empty{% endif %}"></i>
+                        <i class="fa fa-star{% if c.rating < 5 %}-o empty{% endif %}"></i>
 
-                        </div>
-                    </div>
-                    <div class="review-body"> <strong>{{ c.subject }}</strong>
-                        <p><h3>Rating: {{ c.rating}}</h3></p>
-                        <p><h3>{{ c.review }}</h3></p>
                     </div>
                 </div>
-                                                {% endfor %}
+                <div class="review-body"> <strong>{{ c.subject }}</strong>
+                    <p><h3>Rating: {{ c.rating}}</h3></p>
+                    <p><h3>{{ c.review }}</h3></p>
+                </div>
+            </div>
+            {% endfor %}
                                         </div>
                                     </div>
 </div>
