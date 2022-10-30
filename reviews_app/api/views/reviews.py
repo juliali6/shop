@@ -13,4 +13,4 @@ class ReviewViewSet(GenericViewSet, ListModelMixin, CreateModelMixin, DestroyMod
     queryset = Reviews.objects.all()
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_field = ['id']
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]  # просмотр только для зарегистрированных пользователей

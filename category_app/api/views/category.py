@@ -6,7 +6,7 @@ from category_app.models import Category
 
 
 class CategoryView(GenericViewSet, RetrieveModelMixin, ListModelMixin, CreateModelMixin, UpdateModelMixin):
-    """Представлениекатегорий товаров."""
+    """Представление категорий товаров."""
 
     serializer_class = CategorySerializer
     queryset = Category.objects.all()

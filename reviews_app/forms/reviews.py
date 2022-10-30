@@ -12,7 +12,8 @@ class ReviewForm(forms.ModelForm):
 
 
 class ImageReviewForm(ReviewForm):
-    """Класс формы добавление изображение к посту"""
+    """Класс формы добавление изображение к отзыву"""
+
     image = forms.ImageField(
         label='Выберите фотографии(Не более 5)',
         required=False,

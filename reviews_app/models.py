@@ -28,3 +28,10 @@ class Reviews(models.Model):
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
+
+
+class MediaReview(models.Model):
+    """Модель изображений отзывов"""
+
+    review = models.ForeignKey(Reviews, on_delete=models.CASCADE)
+    image_review = models.ImageField(null=False, blank=True)

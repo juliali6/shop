@@ -1,21 +1,21 @@
 from django.shortcuts import render, redirect
 
-from profile_app.models import Profile
 from django.contrib.contenttypes.models import ContentType
 
 from django.contrib import messages
 
 from reviews_app.forms.reviews import ImageReviewForm
+from reviews_app.models import MediaReview
 
 
 def add_review(request, *args, **kwargs):
     if request.method == "POST":
         url = request.META.get('HTTP_REFERER')
-        form = ImageReviewForm(request.POST or None, request.FILES)
-        image = request.FILES.getlist('image')
-        if len(image) > 5:
+        form = ImageReviewForm(request.POST, request.FILES)
+        files = request.FILES.getlist('image')
+        if len(files) > 5:
             context = {
-                "title": "Добавление нового поста",
+                "title": "Добавление нового отзыва",
                 "form": form,
                 "error": "Максимальное количество фотографии - 5",
             }
@@ -33,6 +33,8 @@ def add_review(request, *args, **kwargs):
             data.object_id = product.id
             data.save()
 
-            messages.success(request, 'Спасибо, вы добавили отзыв!!!')
-
+            messages.success(request, 'Вы добавили отзыв!!!')
+            for f in files:
+                MediaReview.objects.create(review=data, image_review=f)
             return redirect(url)
+
