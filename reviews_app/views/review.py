@@ -33,7 +33,7 @@ def add_review(request, *args, **kwargs):
             data.object_id = product.id
             data.save()
 
-            messages.success(request, 'Вы добавили отзыв!!!')
+            messages.success(request, 'Thanks for your review!!!')
             for f in files:
                 MediaReview.objects.create(review=data, image_review=f)
             return redirect(url)
